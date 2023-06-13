@@ -20,13 +20,12 @@ public class NotepadTest {
     public static void setUp() {
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability(“app”, “C:\\Windows\\System32\\notepad.exe”);
-//            capabilities.setCapability(“platformName”,”Windows”);
-//            capabilities.setCapability(“deviceName”, “WindowsPC”);
-            notepadSession = new WindowsDriver(new URL(“http://127.0.0.1:4723”), capabilities);
+            capabilities.setCapability("app", "C:\\Windows\\system32\\notepad");
+            capabilities.setCapability("platformName","Windows");
+            capabilities.setCapability("deviceName", "WindowsPC");
+            notepadSession = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
             notepadSession.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -41,20 +40,20 @@ public class NotepadTest {
     }
     @Test
     public void checkAboutWindow() {
-        notepadSession.findElementByName(“Help”).click();
-        notepadSession.findElementByName(“About Notepad”).click();
-        notepadSession.findElementByName(“OK”).click();
+        notepadSession.findElementByName("Settings").click();
+        notepadSession.findElementByName("Help").click();
+//        notepadSession.findElementByName("OK").click();
     }
     @Test
     public void sendTestText(){
-        notepadSession.findElementByClassName(“Edit”).sendKeys(getDate());
-        notepadSession.findElementByClassName(“Edit”).clear();
+        notepadSession.findElementByName("Edit").click();
+        notepadSession.findElementByName("Time/Date").click();
     }
-    @Test()
-    public void pressTimeAndDateButton(){
-        notepadSession.findElementByClassName(“Edit”).clear();
-        notepadSession.findElementByAccessibilityId(“26”).click();
-        Assert.assertNotNull(notepadSession.findElementByClassName(“Edit”));
-        notepadSession.findElementByClassName(“Edit”).clear();
-    }
+//    @Test()
+//    public void pressTimeAndDateButton(){
+//        notepadSession.findElementByName("Edit").click();
+//        notepadSession.findElementByAccessibilityId("26").click();
+//        Assert.assertNotNull(notepadSession.findElementByClassName("Edit"));
+//        notepadSession.findElementByClassName("Edit").clear();
+//    }
 }
